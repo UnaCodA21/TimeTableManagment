@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e9e2dbfc498d4a05b36fd152f0745a3f" Name="Diagram1">
+        <EntityTypeShape EntityType="ClassShedulerModel.Course" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClassShedulerModel.Faculty" Width="1.5" PointX="0.75" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClassShedulerModel.Lecture" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClassShedulerModel.Semester" Width="1.5" PointX="2.5" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClassShedulerModel.Subject" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClassShedulerModel.User" Width="1.5" PointX="4.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClassShedulerModel.Year" Width="1.5" PointX="0.75" PointY="7" IsExpanded="true" />
+        <AssociationConnector Association="ClassShedulerModel.FK_Course_ToTable" ManuallyRouted="false" />
+        <AssociationConnector Association="ClassShedulerModel.FK_Course_ToTable_1" ManuallyRouted="false" />
+        <AssociationConnector Association="ClassShedulerModel.FK_Course_ToTable_2" ManuallyRouted="false" />
+        <AssociationConnector Association="ClassShedulerModel.FK_Lecture_ToTable" ManuallyRouted="false" />
+        <AssociationConnector Association="ClassShedulerModel.FK_Lecture_ToTable_1" ManuallyRouted="false" />
+        <AssociationConnector Association="ClassShedulerModel.FK_Course_ToTable_3" />
+        <EntityTypeShape EntityType="ClassShedulerModel.Attendance" Width="1.5" PointX="8.125" PointY="2.625" />
+        <EntityTypeShape EntityType="ClassShedulerModel.Department" Width="1.5" PointX="3" PointY="12" />
+        <EntityTypeShape EntityType="ClassShedulerModel.Gender" Width="1.5" PointX="9.625" PointY="0.875" />
+        <EntityTypeShape EntityType="ClassShedulerModel.Room" Width="1.5" PointX="3" PointY="9.5" />
+        <AssociationConnector Association="ClassShedulerModel.FK_Lecture_ToTable_3" />
+        <AssociationConnector Association="ClassShedulerModel.FK_Subject_ToTable" />
+        <AssociationConnector Association="ClassShedulerModel.FK_Course_ToTable_4" />
+        <AssociationConnector Association="ClassShedulerModel.FK_Lecture_ToTable_2" />
+        <AssociationConnector Association="ClassShedulerModel.FK_Subject_ToTable_1" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

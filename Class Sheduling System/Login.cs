@@ -16,5 +16,28 @@ namespace Class_Sheduling_System
         {
             InitializeComponent();
         }
+
+        private void BtnClick(object sender, EventArgs e)
+        {
+
+            var username = TbUserName.Text;
+            var password = TbPassword.Text;
+
+            var ctx = new ClassShedulerEntities();
+
+            var user = ctx.Users.Any(q => q.User_Name == username && q.Password == password);
+
+            if(user)
+            {
+                MessageBox.Show($"Welcom {username}");
+                var parent = (MainForm)this.MdiParent;
+                parent.isLoggedIn = true;
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Invalid username or password!");
+            }
+        }
     }
 }

@@ -33,9 +33,9 @@
             this.CbCourse = new System.Windows.Forms.ComboBox();
             this.CbFaculty = new System.Windows.Forms.ComboBox();
             this.CbGender = new System.Windows.Forms.ComboBox();
+            this.CbRoom = new System.Windows.Forms.ComboBox();
             this.CbSubject = new System.Windows.Forms.ComboBox();
             this.CbSemester = new System.Windows.Forms.ComboBox();
-            this.CbYear = new System.Windows.Forms.ComboBox();
             this.CbDepartment = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -43,12 +43,13 @@
             this.TbAddress = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.TbStaffName = new System.Windows.Forms.TextBox();
+            this.TbLastName = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.TbStaffId = new System.Windows.Forms.TextBox();
+            this.TbFirstName = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
@@ -57,8 +58,7 @@
             this.BtnClear = new System.Windows.Forms.Button();
             this.BtnDelete = new System.Windows.Forms.Button();
             this.BtnSave = new System.Windows.Forms.Button();
-            this.label11 = new System.Windows.Forms.Label();
-            this.CbRoom = new System.Windows.Forms.ComboBox();
+            this.TbYear = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -80,7 +80,6 @@
             this.splitContainer1.Panel1.Controls.Add(this.CbRoom);
             this.splitContainer1.Panel1.Controls.Add(this.CbSubject);
             this.splitContainer1.Panel1.Controls.Add(this.CbSemester);
-            this.splitContainer1.Panel1.Controls.Add(this.CbYear);
             this.splitContainer1.Panel1.Controls.Add(this.CbDepartment);
             this.splitContainer1.Panel1.Controls.Add(this.label8);
             this.splitContainer1.Panel1.Controls.Add(this.label7);
@@ -88,13 +87,14 @@
             this.splitContainer1.Panel1.Controls.Add(this.TbAddress);
             this.splitContainer1.Panel1.Controls.Add(this.label5);
             this.splitContainer1.Panel1.Controls.Add(this.label4);
-            this.splitContainer1.Panel1.Controls.Add(this.TbStaffName);
+            this.splitContainer1.Panel1.Controls.Add(this.TbYear);
+            this.splitContainer1.Panel1.Controls.Add(this.TbLastName);
             this.splitContainer1.Panel1.Controls.Add(this.label3);
             this.splitContainer1.Panel1.Controls.Add(this.label11);
             this.splitContainer1.Panel1.Controls.Add(this.label13);
             this.splitContainer1.Panel1.Controls.Add(this.label12);
             this.splitContainer1.Panel1.Controls.Add(this.label10);
-            this.splitContainer1.Panel1.Controls.Add(this.TbStaffId);
+            this.splitContainer1.Panel1.Controls.Add(this.TbFirstName);
             this.splitContainer1.Panel1.Controls.Add(this.label9);
             this.splitContainer1.Panel1.Controls.Add(this.label2);
             this.splitContainer1.Panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer1_Panel1_Paint);
@@ -139,10 +139,18 @@
             this.CbGender.Size = new System.Drawing.Size(121, 21);
             this.CbGender.TabIndex = 2;
             // 
+            // CbRoom
+            // 
+            this.CbRoom.FormattingEnabled = true;
+            this.CbRoom.Location = new System.Drawing.Point(373, 173);
+            this.CbRoom.Name = "CbRoom";
+            this.CbRoom.Size = new System.Drawing.Size(121, 21);
+            this.CbRoom.TabIndex = 2;
+            // 
             // CbSubject
             // 
             this.CbSubject.FormattingEnabled = true;
-            this.CbSubject.Location = new System.Drawing.Point(373, 133);
+            this.CbSubject.Location = new System.Drawing.Point(373, 136);
             this.CbSubject.Name = "CbSubject";
             this.CbSubject.Size = new System.Drawing.Size(121, 21);
             this.CbSubject.TabIndex = 2;
@@ -154,14 +162,6 @@
             this.CbSemester.Name = "CbSemester";
             this.CbSemester.Size = new System.Drawing.Size(121, 21);
             this.CbSemester.TabIndex = 2;
-            // 
-            // CbYear
-            // 
-            this.CbYear.FormattingEnabled = true;
-            this.CbYear.Location = new System.Drawing.Point(373, 55);
-            this.CbYear.Name = "CbYear";
-            this.CbYear.Size = new System.Drawing.Size(121, 21);
-            this.CbYear.TabIndex = 2;
             // 
             // CbDepartment
             // 
@@ -234,13 +234,13 @@
             this.label4.Text = "Gender";
             this.label4.Click += new System.EventHandler(this.label1_Click);
             // 
-            // TbStaffName
+            // TbLastName
             // 
-            this.TbStaffName.Location = new System.Drawing.Point(110, 56);
-            this.TbStaffName.Name = "TbStaffName";
-            this.TbStaffName.Size = new System.Drawing.Size(121, 20);
-            this.TbStaffName.TabIndex = 1;
-            this.TbStaffName.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.TbLastName.Location = new System.Drawing.Point(110, 56);
+            this.TbLastName.Name = "TbLastName";
+            this.TbLastName.Size = new System.Drawing.Size(121, 20);
+            this.TbLastName.TabIndex = 1;
+            this.TbLastName.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // label3
             // 
@@ -248,10 +248,21 @@
             this.label3.Font = new System.Drawing.Font("Segoe UI Historic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(14, 56);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(84, 20);
+            this.label3.Size = new System.Drawing.Size(79, 20);
             this.label3.TabIndex = 0;
-            this.label3.Text = "Staff Name";
+            this.label3.Text = "Last Name";
             this.label3.Click += new System.EventHandler(this.label1_Click);
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Segoe UI Historic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(276, 174);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(49, 20);
+            this.label11.TabIndex = 0;
+            this.label11.Text = "Room";
+            this.label11.Click += new System.EventHandler(this.label1_Click);
             // 
             // label13
             // 
@@ -286,13 +297,13 @@
             this.label10.Text = "Year";
             this.label10.Click += new System.EventHandler(this.label1_Click);
             // 
-            // TbStaffId
+            // TbFirstName
             // 
-            this.TbStaffId.Location = new System.Drawing.Point(110, 17);
-            this.TbStaffId.Name = "TbStaffId";
-            this.TbStaffId.Size = new System.Drawing.Size(121, 20);
-            this.TbStaffId.TabIndex = 1;
-            this.TbStaffId.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.TbFirstName.Location = new System.Drawing.Point(110, 17);
+            this.TbFirstName.Name = "TbFirstName";
+            this.TbFirstName.Size = new System.Drawing.Size(121, 20);
+            this.TbFirstName.TabIndex = 1;
+            this.TbFirstName.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // label9
             // 
@@ -311,9 +322,9 @@
             this.label2.Font = new System.Drawing.Font("Segoe UI Historic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(14, 21);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(59, 20);
+            this.label2.Size = new System.Drawing.Size(80, 20);
             this.label2.TabIndex = 0;
-            this.label2.Text = "Staff ID";
+            this.label2.Text = "First Name";
             this.label2.Click += new System.EventHandler(this.label1_Click);
             // 
             // dataGridView1
@@ -374,25 +385,15 @@
             this.BtnSave.TabIndex = 3;
             this.BtnSave.Text = "Save";
             this.BtnSave.UseVisualStyleBackColor = true;
+            this.BtnSave.Click += new System.EventHandler(this.BtnSave_Click);
             // 
-            // label11
+            // TbYear
             // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Segoe UI Historic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(276, 174);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(49, 20);
-            this.label11.TabIndex = 0;
-            this.label11.Text = "Room";
-            this.label11.Click += new System.EventHandler(this.label1_Click);
-            // 
-            // CbRoom
-            // 
-            this.CbRoom.FormattingEnabled = true;
-            this.CbRoom.Location = new System.Drawing.Point(373, 173);
-            this.CbRoom.Name = "CbRoom";
-            this.CbRoom.Size = new System.Drawing.Size(121, 21);
-            this.CbRoom.TabIndex = 2;
+            this.TbYear.Location = new System.Drawing.Point(373, 56);
+            this.TbYear.Name = "TbYear";
+            this.TbYear.Size = new System.Drawing.Size(121, 20);
+            this.TbYear.TabIndex = 1;
+            this.TbYear.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // Staff_Data_Entry
             // 
@@ -421,11 +422,11 @@
 
         #endregion
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.TextBox TbStaffId;
+        private System.Windows.Forms.TextBox TbFirstName;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox TbStaffName;
+        private System.Windows.Forms.TextBox TbLastName;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
@@ -442,7 +443,6 @@
         private System.Windows.Forms.ComboBox CbGender;
         private System.Windows.Forms.ComboBox CbSubject;
         private System.Windows.Forms.ComboBox CbSemester;
-        private System.Windows.Forms.ComboBox CbYear;
         private System.Windows.Forms.ComboBox CbDepartment;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button BtnUpdate;
@@ -451,5 +451,6 @@
         private System.Windows.Forms.Button BtnSave;
         private System.Windows.Forms.ComboBox CbRoom;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TextBox TbYear;
     }
 }
