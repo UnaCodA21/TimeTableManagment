@@ -28,21 +28,23 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.CbAttedance = new System.Windows.Forms.ComboBox();
             this.CbCourse = new System.Windows.Forms.ComboBox();
             this.CbFaculty = new System.Windows.Forms.ComboBox();
             this.CbGender = new System.Windows.Forms.ComboBox();
+            this.genderBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.CbRoom = new System.Windows.Forms.ComboBox();
             this.CbSubject = new System.Windows.Forms.ComboBox();
             this.CbSemester = new System.Windows.Forms.ComboBox();
-            this.CbDepartment = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.TbAddress = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.TbYear = new System.Windows.Forms.TextBox();
             this.TbLastName = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
@@ -50,7 +52,6 @@
             this.label12 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.TbFirstName = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
@@ -58,11 +59,11 @@
             this.BtnClear = new System.Windows.Forms.Button();
             this.BtnDelete = new System.Windows.Forms.Button();
             this.BtnSave = new System.Windows.Forms.Button();
-            this.TbYear = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.genderBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -80,7 +81,6 @@
             this.splitContainer1.Panel1.Controls.Add(this.CbRoom);
             this.splitContainer1.Panel1.Controls.Add(this.CbSubject);
             this.splitContainer1.Panel1.Controls.Add(this.CbSemester);
-            this.splitContainer1.Panel1.Controls.Add(this.CbDepartment);
             this.splitContainer1.Panel1.Controls.Add(this.label8);
             this.splitContainer1.Panel1.Controls.Add(this.label7);
             this.splitContainer1.Panel1.Controls.Add(this.label6);
@@ -95,7 +95,6 @@
             this.splitContainer1.Panel1.Controls.Add(this.label12);
             this.splitContainer1.Panel1.Controls.Add(this.label10);
             this.splitContainer1.Panel1.Controls.Add(this.TbFirstName);
-            this.splitContainer1.Panel1.Controls.Add(this.label9);
             this.splitContainer1.Panel1.Controls.Add(this.label2);
             this.splitContainer1.Panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer1_Panel1_Paint);
             // 
@@ -133,16 +132,23 @@
             // 
             // CbGender
             // 
+            this.CbGender.DataSource = this.genderBindingSource;
+            this.CbGender.DisplayMember = "Gender1";
             this.CbGender.FormattingEnabled = true;
             this.CbGender.Location = new System.Drawing.Point(110, 93);
             this.CbGender.Name = "CbGender";
             this.CbGender.Size = new System.Drawing.Size(121, 21);
             this.CbGender.TabIndex = 2;
+            this.CbGender.ValueMember = "Gendere_Id";
+            // 
+            // genderBindingSource
+            // 
+            this.genderBindingSource.DataSource = typeof(Class_Sheduling_System.Gender);
             // 
             // CbRoom
             // 
             this.CbRoom.FormattingEnabled = true;
-            this.CbRoom.Location = new System.Drawing.Point(373, 173);
+            this.CbRoom.Location = new System.Drawing.Point(373, 132);
             this.CbRoom.Name = "CbRoom";
             this.CbRoom.Size = new System.Drawing.Size(121, 21);
             this.CbRoom.TabIndex = 2;
@@ -150,7 +156,7 @@
             // CbSubject
             // 
             this.CbSubject.FormattingEnabled = true;
-            this.CbSubject.Location = new System.Drawing.Point(373, 136);
+            this.CbSubject.Location = new System.Drawing.Point(373, 95);
             this.CbSubject.Name = "CbSubject";
             this.CbSubject.Size = new System.Drawing.Size(121, 21);
             this.CbSubject.TabIndex = 2;
@@ -158,18 +164,10 @@
             // CbSemester
             // 
             this.CbSemester.FormattingEnabled = true;
-            this.CbSemester.Location = new System.Drawing.Point(373, 93);
+            this.CbSemester.Location = new System.Drawing.Point(373, 52);
             this.CbSemester.Name = "CbSemester";
             this.CbSemester.Size = new System.Drawing.Size(121, 21);
             this.CbSemester.TabIndex = 2;
-            // 
-            // CbDepartment
-            // 
-            this.CbDepartment.FormattingEnabled = true;
-            this.CbDepartment.Location = new System.Drawing.Point(373, 15);
-            this.CbDepartment.Name = "CbDepartment";
-            this.CbDepartment.Size = new System.Drawing.Size(121, 21);
-            this.CbDepartment.TabIndex = 2;
             // 
             // label8
             // 
@@ -234,6 +232,14 @@
             this.label4.Text = "Gender";
             this.label4.Click += new System.EventHandler(this.label1_Click);
             // 
+            // TbYear
+            // 
+            this.TbYear.Location = new System.Drawing.Point(373, 15);
+            this.TbYear.Name = "TbYear";
+            this.TbYear.Size = new System.Drawing.Size(121, 20);
+            this.TbYear.TabIndex = 1;
+            this.TbYear.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            // 
             // TbLastName
             // 
             this.TbLastName.Location = new System.Drawing.Point(110, 56);
@@ -257,7 +263,7 @@
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Segoe UI Historic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(276, 174);
+            this.label11.Location = new System.Drawing.Point(276, 133);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(49, 20);
             this.label11.TabIndex = 0;
@@ -268,7 +274,7 @@
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Segoe UI Historic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(276, 134);
+            this.label13.Location = new System.Drawing.Point(276, 93);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(58, 20);
             this.label13.TabIndex = 0;
@@ -279,7 +285,7 @@
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Segoe UI Historic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(276, 94);
+            this.label12.Location = new System.Drawing.Point(276, 53);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(70, 20);
             this.label12.TabIndex = 0;
@@ -290,7 +296,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Segoe UI Historic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(276, 58);
+            this.label10.Location = new System.Drawing.Point(276, 17);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(38, 20);
             this.label10.TabIndex = 0;
@@ -304,17 +310,6 @@
             this.TbFirstName.Size = new System.Drawing.Size(121, 20);
             this.TbFirstName.TabIndex = 1;
             this.TbFirstName.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Segoe UI Historic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(276, 17);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(89, 20);
-            this.label9.TabIndex = 0;
-            this.label9.Text = "Department";
-            this.label9.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 
@@ -387,14 +382,6 @@
             this.BtnSave.UseVisualStyleBackColor = true;
             this.BtnSave.Click += new System.EventHandler(this.BtnSave_Click);
             // 
-            // TbYear
-            // 
-            this.TbYear.Location = new System.Drawing.Point(373, 56);
-            this.TbYear.Name = "TbYear";
-            this.TbYear.Size = new System.Drawing.Size(121, 20);
-            this.TbYear.TabIndex = 1;
-            this.TbYear.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
-            // 
             // Staff_Data_Entry
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -414,6 +401,7 @@
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.genderBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -436,14 +424,12 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label9;
         private System.Windows.Forms.ComboBox CbAttedance;
         private System.Windows.Forms.ComboBox CbCourse;
         private System.Windows.Forms.ComboBox CbFaculty;
         private System.Windows.Forms.ComboBox CbGender;
         private System.Windows.Forms.ComboBox CbSubject;
         private System.Windows.Forms.ComboBox CbSemester;
-        private System.Windows.Forms.ComboBox CbDepartment;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button BtnUpdate;
         private System.Windows.Forms.Button BtnClear;
@@ -452,5 +438,6 @@
         private System.Windows.Forms.ComboBox CbRoom;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox TbYear;
+        private System.Windows.Forms.BindingSource genderBindingSource;
     }
 }

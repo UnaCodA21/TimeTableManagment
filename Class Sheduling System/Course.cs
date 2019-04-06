@@ -34,6 +34,5 @@ namespace Class_Sheduling_System
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Lecture> Lectures { get; set; }
         public virtual Semester Semester { get; set; }
-        public virtual Department Department { get; set; }
     }
 }

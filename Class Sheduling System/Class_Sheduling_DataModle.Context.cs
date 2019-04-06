@@ -33,7 +33,6 @@ namespace Class_Sheduling_System
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Year> Years { get; set; }
         public virtual DbSet<Attendance> Attendances { get; set; }
-        public virtual DbSet<Department> Departments { get; set; }
         public virtual DbSet<Gender> Genders { get; set; }
         public virtual DbSet<Room> Rooms { get; set; }
     }

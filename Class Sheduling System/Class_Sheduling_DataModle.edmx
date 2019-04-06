@@ -24,13 +24,6 @@
           <Property Name="semester_id " Type="int" />
           <Property Name="department_id" Type="int" />
         </EntityType>
-        <EntityType Name="Department">
-          <Key>
-            <PropertyRef Name="Department_Id" />
-          </Key>
-          <Property Name="Department_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Department" Type="varchar" MaxLength="60" />
-        </EntityType>
         <EntityType Name="Faculty">
           <Key>
             <PropertyRef Name="Faculty_Id" />
@@ -144,18 +137,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Course_ToTable_4">
-          <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
-          <End Role="Course" Type="Self.Course" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Department">
-              <PropertyRef Name="Department_Id" />
-            </Principal>
-            <Dependent Role="Course">
-              <PropertyRef Name="department_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Lecture_ToTable">
           <End Role="Course" Type="Self.Course" Multiplicity="0..1" />
           <End Role="Lecture" Type="Self.Lecture" Multiplicity="*" />
@@ -231,7 +212,6 @@
         <EntityContainer Name="ClassShedulerModelStoreContainer">
           <EntitySet Name="Attendance" EntityType="Self.Attendance" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Course" EntityType="Self.Course" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Faculty" EntityType="Self.Faculty" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Gender" EntityType="Self.Gender" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Lecture" EntityType="Self.Lecture" Schema="dbo" store:Type="Tables" />
@@ -254,10 +234,6 @@
           </AssociationSet>
           <AssociationSet Name="FK_Course_ToTable_3" Association="Self.FK_Course_ToTable_3">
             <End Role="Semester" EntitySet="Semester" />
-            <End Role="Course" EntitySet="Course" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Course_ToTable_4" Association="Self.FK_Course_ToTable_4">
-            <End Role="Department" EntitySet="Department" />
             <End Role="Course" EntitySet="Course" />
           </AssociationSet>
           <AssociationSet Name="FK_Lecture_ToTable" Association="Self.FK_Lecture_ToTable">
@@ -305,7 +281,6 @@
           <Property Name="semester_id_" Type="Int32" />
           <NavigationProperty Name="Semester" Relationship="ClassShedulerModel.FK_Course_ToTable_3" FromRole="Course" ToRole="Semester" />
           <Property Name="department_id" Type="Int32" />
-          <NavigationProperty Name="Department" Relationship="ClassShedulerModel.FK_Course_ToTable_4" FromRole="Course" ToRole="Department" />
         </EntityType>
         <EntityType Name="Faculty">
           <Key>
@@ -462,7 +437,6 @@
             <End Role="Course" EntitySet="Courses" />
           </AssociationSet>
           <EntitySet Name="Attendances" EntityType="ClassShedulerModel.Attendance" />
-          <EntitySet Name="Departments" EntityType="ClassShedulerModel.Department" />
           <EntitySet Name="Genders" EntityType="ClassShedulerModel.Gender" />
           <EntitySet Name="Rooms" EntityType="ClassShedulerModel.Room" />
           <AssociationSet Name="FK_Lecture_ToTable_3" Association="ClassShedulerModel.FK_Lecture_ToTable_3">
@@ -472,10 +446,6 @@
           <AssociationSet Name="FK_Subject_ToTable" Association="ClassShedulerModel.FK_Subject_ToTable">
             <End Role="Attendance" EntitySet="Attendances" />
             <End Role="Subject" EntitySet="Subjects" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Course_ToTable_4" Association="ClassShedulerModel.FK_Course_ToTable_4">
-            <End Role="Department" EntitySet="Departments" />
-            <End Role="Course" EntitySet="Courses" />
           </AssociationSet>
           <AssociationSet Name="FK_Lecture_ToTable_2" Association="ClassShedulerModel.FK_Lecture_ToTable_2">
             <End Role="Gender" EntitySet="Genders" />
@@ -506,14 +476,6 @@
           <Property Name="Attendance1" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Lectures" Relationship="ClassShedulerModel.FK_Lecture_ToTable_3" FromRole="Attendance" ToRole="Lecture" />
           <NavigationProperty Name="Subjects" Relationship="ClassShedulerModel.FK_Subject_ToTable" FromRole="Attendance" ToRole="Subject" />
-        </EntityType>
-        <EntityType Name="Department">
-          <Key>
-            <PropertyRef Name="Department_Id" />
-          </Key>
-          <Property Name="Department_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Department1" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Courses" Relationship="ClassShedulerModel.FK_Course_ToTable_4" FromRole="Department" ToRole="Course" />
         </EntityType>
         <EntityType Name="Gender">
           <Key>
@@ -552,18 +514,6 @@
             </Principal>
             <Dependent Role="Subject">
               <PropertyRef Name="attendance_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Course_ToTable_4">
-          <End Type="ClassShedulerModel.Department" Role="Department" Multiplicity="0..1" />
-          <End Type="ClassShedulerModel.Course" Role="Course" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Department">
-              <PropertyRef Name="Department_Id" />
-            </Principal>
-            <Dependent Role="Course">
-              <PropertyRef Name="department_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -672,14 +622,6 @@
               <MappingFragment StoreEntitySet="Attendance">
                 <ScalarProperty Name="Attendance1" ColumnName="Attendance" />
                 <ScalarProperty Name="Attendance_Id" ColumnName="Attendance_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Departments">
-            <EntityTypeMapping TypeName="ClassShedulerModel.Department">
-              <MappingFragment StoreEntitySet="Department">
-                <ScalarProperty Name="Department1" ColumnName="Department" />
-                <ScalarProperty Name="Department_Id" ColumnName="Department_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

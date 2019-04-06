@@ -82,9 +82,6 @@
     <Compile Include="Course.cs">
       <DependentUpon>Class_Sheduling_DataModle.tt</DependentUpon>
     </Compile>
-    <Compile Include="Department.cs">
-      <DependentUpon>Class_Sheduling_DataModle.tt</DependentUpon>
-    </Compile>
     <Compile Include="Faculty.cs">
       <DependentUpon>Class_Sheduling_DataModle.tt</DependentUpon>
     </Compile>
@@ -158,6 +155,25 @@
       <DependentUpon>Class_Sheduling_DataModle.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\Attendance.datasource" />
+    <None Include="Properties\DataSources\ClassShedulerEntities.datasource" />
+    <None Include="Properties\DataSources\Class_Sheduling_System.Properties.Resources.datasource" />
+    <None Include="Properties\DataSources\Class_Sheduling_System.Properties.Settings.datasource" />
+    <None Include="Properties\DataSources\Class_View_TimeTable_View.datasource" />
+    <None Include="Properties\DataSources\Course.datasource" />
+    <None Include="Properties\DataSources\Department.datasource" />
+    <None Include="Properties\DataSources\Faculty.datasource" />
+    <None Include="Properties\DataSources\Gender.datasource" />
+    <None Include="Properties\DataSources\Lecture.datasource" />
+    <None Include="Properties\DataSources\Login.datasource" />
+    <None Include="Properties\DataSources\MainForm.datasource" />
+    <None Include="Properties\DataSources\Program.datasource" />
+    <None Include="Properties\DataSources\Room.datasource" />
+    <None Include="Properties\DataSources\Semester.datasource" />
+    <None Include="Properties\DataSources\Staff_Data_Entry.datasource" />
+    <None Include="Properties\DataSources\Subject.datasource" />
+    <None Include="Properties\DataSources\User.datasource" />
+    <None Include="Properties\DataSources\Year.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

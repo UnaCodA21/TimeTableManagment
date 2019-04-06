@@ -23,8 +23,21 @@ namespace Class_Sheduling_System
 
         private void Staff_Data_Entry_Load(object sender, EventArgs e)
         {
-           
+            try
+            {
+                ctx = new ClassShedulerEntities();
 
+                var gender = ctx.Genders.ToList();
+                CbGender.DataSource = gender;
+                CbGender.DisplayMember = "Name";
+                CbGender.ValueMember = "Gendere_Id";
+                
+
+            }catch(Exception ex)
+            {
+                throw ex;
+            }
+          
         }
 
         private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e)
@@ -45,6 +58,7 @@ namespace Class_Sheduling_System
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
 
+
         }
 
         private void BtnSave_Click(object sender, EventArgs e)
@@ -56,7 +70,6 @@ namespace Class_Sheduling_System
            // var faculty = CbFaculty.SelectedValue;
             var course = CbCourse.SelectedValue;
             var attendance = CbAttedance.SelectedValue;
-            var department = CbDepartment.SelectedValue;
             var year = TbYear.Text;
             var semester = CbSemester.SelectedValue;
             var subject = CbSubject.SelectedValue;
