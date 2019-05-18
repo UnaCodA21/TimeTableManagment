@@ -17,13 +17,13 @@ namespace Class_Sheduling_System
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Room()
         {
-            this.Subjects = new HashSet<Subject>();
+            this.CouresAssingments = new HashSet<CouresAssingment>();
         }
     
         public int Room_ID { get; set; }
         public string Room1 { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Subject> Subjects { get; set; }
+        public virtual ICollection<CouresAssingment> CouresAssingments { get; set; }
     }
 }

@@ -17,13 +17,13 @@ namespace Class_Sheduling_System
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Gender()
         {
-            this.Lectures = new HashSet<Lecture>();
+            this.Lecturers = new HashSet<Lecturer>();
         }
     
         public int Gendere_Id { get; set; }
         public string Gender1 { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Lecture> Lectures { get; set; }
+        public virtual ICollection<Lecturer> Lecturers { get; set; }
     }
 }

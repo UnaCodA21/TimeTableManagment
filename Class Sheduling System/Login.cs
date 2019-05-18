@@ -39,5 +39,24 @@ namespace Class_Sheduling_System
                 MessageBox.Show("Invalid username or password!");
             }
         }
+
+        private void toolStripBtnHome_Click(object sender, EventArgs e)
+        {
+            Staff_Data_Entry staff = new Staff_Data_Entry();
+            staff.MdiParent = this;
+            staff.WindowState = FormWindowState.Maximized;
+            staff.Show();
+        }
+
+        private void BntReset_Click(object sender, EventArgs e)
+        {
+            ResetForm();
+        }
+
+        void ResetForm()
+        {
+            TbUserName.Clear();
+            TbPassword.Clear();
+        }
     }
 }

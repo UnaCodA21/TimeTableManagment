@@ -55,7 +55,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Attendance.cs">
+    <Compile Include="AcademicYear.cs">
       <DependentUpon>Class_Sheduling_DataModle.tt</DependentUpon>
     </Compile>
     <Compile Include="Class View TimeTable View.cs">
@@ -63,6 +63,12 @@
     </Compile>
     <Compile Include="Class View TimeTable View.Designer.cs">
       <DependentUpon>Class View TimeTable View.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ClassSheduler.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ClassSheduler.Designer.cs">
+      <DependentUpon>ClassSheduler.cs</DependentUpon>
     </Compile>
     <Compile Include="Class_Sheduling_DataModle.Context.cs">
       <AutoGen>True</AutoGen>
@@ -79,7 +85,19 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Class_Sheduling_DataModle.edmx</DependentUpon>
     </Compile>
+    <Compile Include="CouresAssingment.cs">
+      <DependentUpon>Class_Sheduling_DataModle.tt</DependentUpon>
+    </Compile>
     <Compile Include="Course.cs">
+      <DependentUpon>Class_Sheduling_DataModle.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CourseAssinment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CourseAssinment.Designer.cs">
+      <DependentUpon>CourseAssinment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DateOfSub.cs">
       <DependentUpon>Class_Sheduling_DataModle.tt</DependentUpon>
     </Compile>
     <Compile Include="Faculty.cs">
@@ -94,7 +112,10 @@
     <Compile Include="Gender.cs">
       <DependentUpon>Class_Sheduling_DataModle.tt</DependentUpon>
     </Compile>
-    <Compile Include="Lecture.cs">
+    <Compile Include="Lecturer.cs">
+      <DependentUpon>Class_Sheduling_DataModle.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LevelOfStudy.cs">
       <DependentUpon>Class_Sheduling_DataModle.tt</DependentUpon>
     </Compile>
     <Compile Include="Login.cs">
@@ -102,6 +123,9 @@
     </Compile>
     <Compile Include="Login.Designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModeOfStudy.cs">
+      <DependentUpon>Class_Sheduling_DataModle.tt</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -120,14 +144,20 @@
     <Compile Include="Subject.cs">
       <DependentUpon>Class_Sheduling_DataModle.tt</DependentUpon>
     </Compile>
-    <Compile Include="User.cs">
+    <Compile Include="Time.cs">
       <DependentUpon>Class_Sheduling_DataModle.tt</DependentUpon>
     </Compile>
-    <Compile Include="Year.cs">
+    <Compile Include="User.cs">
       <DependentUpon>Class_Sheduling_DataModle.tt</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Class View TimeTable View.resx">
       <DependentUpon>Class View TimeTable View.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ClassSheduler.resx">
+      <DependentUpon>ClassSheduler.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CourseAssinment.resx">
+      <DependentUpon>CourseAssinment.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
@@ -155,23 +185,28 @@
       <DependentUpon>Class_Sheduling_DataModle.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\AcademicYear.datasource" />
     <None Include="Properties\DataSources\Attendance.datasource" />
     <None Include="Properties\DataSources\ClassShedulerEntities.datasource" />
     <None Include="Properties\DataSources\Class_Sheduling_System.Properties.Resources.datasource" />
     <None Include="Properties\DataSources\Class_Sheduling_System.Properties.Settings.datasource" />
     <None Include="Properties\DataSources\Class_View_TimeTable_View.datasource" />
     <None Include="Properties\DataSources\Course.datasource" />
+    <None Include="Properties\DataSources\CourseAssinment.datasource" />
     <None Include="Properties\DataSources\Department.datasource" />
     <None Include="Properties\DataSources\Faculty.datasource" />
     <None Include="Properties\DataSources\Gender.datasource" />
     <None Include="Properties\DataSources\Lecture.datasource" />
+    <None Include="Properties\DataSources\Lecturer.datasource" />
     <None Include="Properties\DataSources\Login.datasource" />
     <None Include="Properties\DataSources\MainForm.datasource" />
+    <None Include="Properties\DataSources\ModeOfStudy.datasource" />
     <None Include="Properties\DataSources\Program.datasource" />
     <None Include="Properties\DataSources\Room.datasource" />
     <None Include="Properties\DataSources\Semester.datasource" />
     <None Include="Properties\DataSources\Staff_Data_Entry.datasource" />
     <None Include="Properties\DataSources\Subject.datasource" />
+    <None Include="Properties\DataSources\Time.datasource" />
     <None Include="Properties\DataSources\User.datasource" />
     <None Include="Properties\DataSources\Year.datasource" />
     <None Include="Properties\Settings.settings">

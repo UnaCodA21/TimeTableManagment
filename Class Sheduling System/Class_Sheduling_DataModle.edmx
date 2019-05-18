@@ -5,24 +5,43 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="ClassShedulerModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="Attendance">
+        <EntityType Name="AcademicYear">
           <Key>
-            <PropertyRef Name="Attendance_Id" />
+            <PropertyRef Name="Academic_Year_Id" />
           </Key>
-          <Property Name="Attendance_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Attendance" Type="varchar" MaxLength="20" />
+          <Property Name="Academic_Year_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Academic_Year" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="CouresAssingment">
+          <Key>
+            <PropertyRef Name="CouresAssingment_Id" />
+          </Key>
+          <Property Name="CouresAssingment_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Faculty_id" Type="int" />
+          <Property Name="Course_id" Type="int" />
+          <Property Name="Subject_id" Type="int" />
+          <Property Name="Lecturer_id" Type="int" />
+          <Property Name="Room_id" Type="int" />
+          <Property Name="Mode_Of_Study_id" Type="int" />
+          <Property Name="Semester_id" Type="int" />
+          <Property Name="Time_id" Type="int" />
+          <Property Name="DateOfSub_id" Type="int" />
         </EntityType>
         <EntityType Name="Course">
           <Key>
             <PropertyRef Name="Course_Id" />
           </Key>
           <Property Name="Course_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Course" Type="varchar" MaxLength="50" />
+          <Property Name="Course_Name" Type="varchar" MaxLength="50" />
           <Property Name="Faculty_Id" Type="int" />
-          <Property Name="Suject_Id" Type="int" />
-          <Property Name="Year_id" Type="int" />
-          <Property Name="semester_id " Type="int" />
-          <Property Name="department_id" Type="int" />
+          <Property Name="LevelOfStudy_id" Type="int" />
+        </EntityType>
+        <EntityType Name="DateOfSub">
+          <Key>
+            <PropertyRef Name="DateOfSub_Id" />
+          </Key>
+          <Property Name="DateOfSub_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DateOfSub" Type="date" />
         </EntityType>
         <EntityType Name="Faculty">
           <Key>
@@ -38,18 +57,32 @@
           <Property Name="Gendere_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Gender" Type="varchar" MaxLength="20" />
         </EntityType>
-        <EntityType Name="Lecture">
+        <EntityType Name="Lecturer">
           <Key>
-            <PropertyRef Name="Lecture_Id" />
+            <PropertyRef Name="Lecturer_Id" />
           </Key>
-          <Property Name="Lecture_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Lecturer_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="First_Name" Type="varchar" MaxLength="20" />
+          <Property Name="Middle_Name" Type="varchar" MaxLength="20" />
           <Property Name="Last_Name" Type="varchar" MaxLength="20" />
-          <Property Name="Course_Id" Type="int" />
-          <Property Name="Subject_Id" Type="int" />
           <Property Name="Address" Type="varchar" MaxLength="60" />
           <Property Name="gender_id" Type="int" />
-          <Property Name="attendance_id" Type="int" />
+          <Property Name="Faculty_id" Type="int" />
+          <Property Name="Initial" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="LevelOfStudy">
+          <Key>
+            <PropertyRef Name="LevelOfStudy_Id" />
+          </Key>
+          <Property Name="LevelOfStudy_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LevelOfStudy" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ModeOfStudy">
+          <Key>
+            <PropertyRef Name="ModeOfStudy_Id" />
+          </Key>
+          <Property Name="ModeOfStudy_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ModeOfStudy" Type="varchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="Room">
           <Key>
@@ -63,16 +96,22 @@
             <PropertyRef Name="Semester_Id" />
           </Key>
           <Property Name="Semester_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Semester" Type="varchar" MaxLength="10" />
+          <Property Name="Semester" Type="varchar" MaxLength="60" />
         </EntityType>
         <EntityType Name="Subject">
           <Key>
             <PropertyRef Name="Subject_Id" />
           </Key>
           <Property Name="Subject_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Subject" Type="varchar" MaxLength="50" />
-          <Property Name="attendance_id" Type="int" />
-          <Property Name="room_id" Type="int" />
+          <Property Name="Subject_Name" Type="varchar" MaxLength="50" />
+          <Property Name="Course_id" Type="int" />
+        </EntityType>
+        <EntityType Name="Time">
+          <Key>
+            <PropertyRef Name="Time_Id" />
+          </Key>
+          <Property Name="Time_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Time" Type="varchar" MaxLength="30" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -82,34 +121,123 @@
           <Property Name="User_Name" Type="varchar" MaxLength="20" />
           <Property Name="Password" Type="varchar" MaxLength="10" />
         </EntityType>
-        <EntityType Name="Year">
-          <Key>
-            <PropertyRef Name="Year_Id" />
-          </Key>
-          <Property Name="Year_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Year" Type="varchar" MaxLength="10" />
-        </EntityType>
-        <Association Name="FK_Course_ToTable">
-          <End Role="Year" Type="Self.Year" Multiplicity="0..1" />
-          <End Role="Course" Type="Self.Course" Multiplicity="*" />
+        <Association Name="FK_CouresAssingment_ToTable">
+          <End Role="Faculty" Type="Self.Faculty" Multiplicity="0..1" />
+          <End Role="CouresAssingment" Type="Self.CouresAssingment" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Year">
-              <PropertyRef Name="Year_Id" />
+            <Principal Role="Faculty">
+              <PropertyRef Name="Faculty_Id" />
             </Principal>
-            <Dependent Role="Course">
-              <PropertyRef Name="Year_id" />
+            <Dependent Role="CouresAssingment">
+              <PropertyRef Name="Faculty_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Course_ToTable_1">
+        <Association Name="FK_CouresAssingment_ToTable_1">
+          <End Role="Course" Type="Self.Course" Multiplicity="0..1" />
+          <End Role="CouresAssingment" Type="Self.CouresAssingment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="Course_Id" />
+            </Principal>
+            <Dependent Role="CouresAssingment">
+              <PropertyRef Name="Course_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CouresAssingment_ToTable_2">
           <End Role="Subject" Type="Self.Subject" Multiplicity="0..1" />
-          <End Role="Course" Type="Self.Course" Multiplicity="*" />
+          <End Role="CouresAssingment" Type="Self.CouresAssingment" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Subject">
               <PropertyRef Name="Subject_Id" />
             </Principal>
+            <Dependent Role="CouresAssingment">
+              <PropertyRef Name="Subject_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CouresAssingment_ToTable_3">
+          <End Role="Lecturer" Type="Self.Lecturer" Multiplicity="0..1" />
+          <End Role="CouresAssingment" Type="Self.CouresAssingment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lecturer">
+              <PropertyRef Name="Lecturer_Id" />
+            </Principal>
+            <Dependent Role="CouresAssingment">
+              <PropertyRef Name="Lecturer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CouresAssingment_ToTable_4">
+          <End Role="Room" Type="Self.Room" Multiplicity="0..1" />
+          <End Role="CouresAssingment" Type="Self.CouresAssingment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Room">
+              <PropertyRef Name="Room_ID" />
+            </Principal>
+            <Dependent Role="CouresAssingment">
+              <PropertyRef Name="Room_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CouresAssingment_ToTable_5">
+          <End Role="ModeOfStudy" Type="Self.ModeOfStudy" Multiplicity="0..1" />
+          <End Role="CouresAssingment" Type="Self.CouresAssingment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ModeOfStudy">
+              <PropertyRef Name="ModeOfStudy_Id" />
+            </Principal>
+            <Dependent Role="CouresAssingment">
+              <PropertyRef Name="Mode_Of_Study_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CouresAssingment_ToTable_6">
+          <End Role="Semester" Type="Self.Semester" Multiplicity="0..1" />
+          <End Role="CouresAssingment" Type="Self.CouresAssingment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Semester">
+              <PropertyRef Name="Semester_Id" />
+            </Principal>
+            <Dependent Role="CouresAssingment">
+              <PropertyRef Name="Semester_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CouresAssingment_ToTable_7">
+          <End Role="Time" Type="Self.Time" Multiplicity="0..1" />
+          <End Role="CouresAssingment" Type="Self.CouresAssingment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Time">
+              <PropertyRef Name="Time_Id" />
+            </Principal>
+            <Dependent Role="CouresAssingment">
+              <PropertyRef Name="Time_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CouresAssingment_ToTable_8">
+          <End Role="DateOfSub" Type="Self.DateOfSub" Multiplicity="0..1" />
+          <End Role="CouresAssingment" Type="Self.CouresAssingment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DateOfSub">
+              <PropertyRef Name="DateOfSub_Id" />
+            </Principal>
+            <Dependent Role="CouresAssingment">
+              <PropertyRef Name="DateOfSub_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Course_ToTable">
+          <End Role="LevelOfStudy" Type="Self.LevelOfStudy" Multiplicity="0..1" />
+          <End Role="Course" Type="Self.Course" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LevelOfStudy">
+              <PropertyRef Name="LevelOfStudy_Id" />
+            </Principal>
             <Dependent Role="Course">
-              <PropertyRef Name="Suject_Id" />
+              <PropertyRef Name="LevelOfStudy_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -125,139 +253,111 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Course_ToTable_3">
-          <End Role="Semester" Type="Self.Semester" Multiplicity="0..1" />
-          <End Role="Course" Type="Self.Course" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Semester">
-              <PropertyRef Name="Semester_Id" />
-            </Principal>
-            <Dependent Role="Course">
-              <PropertyRef Name="semester_id " />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Lecture_ToTable">
-          <End Role="Course" Type="Self.Course" Multiplicity="0..1" />
-          <End Role="Lecture" Type="Self.Lecture" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Course">
-              <PropertyRef Name="Course_Id" />
-            </Principal>
-            <Dependent Role="Lecture">
-              <PropertyRef Name="Course_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Lecture_ToTable_1">
-          <End Role="Subject" Type="Self.Subject" Multiplicity="0..1" />
-          <End Role="Lecture" Type="Self.Lecture" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Subject">
-              <PropertyRef Name="Subject_Id" />
-            </Principal>
-            <Dependent Role="Lecture">
-              <PropertyRef Name="Subject_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Lecture_ToTable_2">
           <End Role="Gender" Type="Self.Gender" Multiplicity="0..1" />
-          <End Role="Lecture" Type="Self.Lecture" Multiplicity="*" />
+          <End Role="Lecturer" Type="Self.Lecturer" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Gender">
               <PropertyRef Name="Gendere_Id" />
             </Principal>
-            <Dependent Role="Lecture">
+            <Dependent Role="Lecturer">
               <PropertyRef Name="gender_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Lecture_ToTable_3">
-          <End Role="Attendance" Type="Self.Attendance" Multiplicity="0..1" />
-          <End Role="Lecture" Type="Self.Lecture" Multiplicity="*" />
+        <Association Name="FK_Lecturer_ToTable">
+          <End Role="Faculty" Type="Self.Faculty" Multiplicity="0..1" />
+          <End Role="Lecturer" Type="Self.Lecturer" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Attendance">
-              <PropertyRef Name="Attendance_Id" />
+            <Principal Role="Faculty">
+              <PropertyRef Name="Faculty_Id" />
             </Principal>
-            <Dependent Role="Lecture">
-              <PropertyRef Name="attendance_id" />
+            <Dependent Role="Lecturer">
+              <PropertyRef Name="Faculty_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Subject_ToTable">
-          <End Role="Attendance" Type="Self.Attendance" Multiplicity="0..1" />
+          <End Role="Course" Type="Self.Course" Multiplicity="0..1" />
           <End Role="Subject" Type="Self.Subject" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Attendance">
-              <PropertyRef Name="Attendance_Id" />
+            <Principal Role="Course">
+              <PropertyRef Name="Course_Id" />
             </Principal>
             <Dependent Role="Subject">
-              <PropertyRef Name="attendance_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Subject_ToTable_1">
-          <End Role="Room" Type="Self.Room" Multiplicity="0..1" />
-          <End Role="Subject" Type="Self.Subject" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Room">
-              <PropertyRef Name="Room_ID" />
-            </Principal>
-            <Dependent Role="Subject">
-              <PropertyRef Name="room_id" />
+              <PropertyRef Name="Course_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="ClassShedulerModelStoreContainer">
-          <EntitySet Name="Attendance" EntityType="Self.Attendance" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AcademicYear" EntityType="Self.AcademicYear" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CouresAssingment" EntityType="Self.CouresAssingment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Course" EntityType="Self.Course" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DateOfSub" EntityType="Self.DateOfSub" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Faculty" EntityType="Self.Faculty" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Gender" EntityType="Self.Gender" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Lecture" EntityType="Self.Lecture" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Lecturer" EntityType="Self.Lecturer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LevelOfStudy" EntityType="Self.LevelOfStudy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ModeOfStudy" EntityType="Self.ModeOfStudy" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Room" EntityType="Self.Room" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Semester" EntityType="Self.Semester" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Subject" EntityType="Self.Subject" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Time" EntityType="Self.Time" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Year" EntityType="Self.Year" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_Course_ToTable" Association="Self.FK_Course_ToTable">
-            <End Role="Year" EntitySet="Year" />
-            <End Role="Course" EntitySet="Course" />
+          <AssociationSet Name="FK_CouresAssingment_ToTable" Association="Self.FK_CouresAssingment_ToTable">
+            <End Role="Faculty" EntitySet="Faculty" />
+            <End Role="CouresAssingment" EntitySet="CouresAssingment" />
           </AssociationSet>
-          <AssociationSet Name="FK_Course_ToTable_1" Association="Self.FK_Course_ToTable_1">
+          <AssociationSet Name="FK_CouresAssingment_ToTable_1" Association="Self.FK_CouresAssingment_ToTable_1">
+            <End Role="Course" EntitySet="Course" />
+            <End Role="CouresAssingment" EntitySet="CouresAssingment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CouresAssingment_ToTable_2" Association="Self.FK_CouresAssingment_ToTable_2">
             <End Role="Subject" EntitySet="Subject" />
+            <End Role="CouresAssingment" EntitySet="CouresAssingment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CouresAssingment_ToTable_3" Association="Self.FK_CouresAssingment_ToTable_3">
+            <End Role="Lecturer" EntitySet="Lecturer" />
+            <End Role="CouresAssingment" EntitySet="CouresAssingment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CouresAssingment_ToTable_4" Association="Self.FK_CouresAssingment_ToTable_4">
+            <End Role="Room" EntitySet="Room" />
+            <End Role="CouresAssingment" EntitySet="CouresAssingment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CouresAssingment_ToTable_5" Association="Self.FK_CouresAssingment_ToTable_5">
+            <End Role="ModeOfStudy" EntitySet="ModeOfStudy" />
+            <End Role="CouresAssingment" EntitySet="CouresAssingment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CouresAssingment_ToTable_6" Association="Self.FK_CouresAssingment_ToTable_6">
+            <End Role="Semester" EntitySet="Semester" />
+            <End Role="CouresAssingment" EntitySet="CouresAssingment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CouresAssingment_ToTable_7" Association="Self.FK_CouresAssingment_ToTable_7">
+            <End Role="Time" EntitySet="Time" />
+            <End Role="CouresAssingment" EntitySet="CouresAssingment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CouresAssingment_ToTable_8" Association="Self.FK_CouresAssingment_ToTable_8">
+            <End Role="DateOfSub" EntitySet="DateOfSub" />
+            <End Role="CouresAssingment" EntitySet="CouresAssingment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Course_ToTable" Association="Self.FK_Course_ToTable">
+            <End Role="LevelOfStudy" EntitySet="LevelOfStudy" />
             <End Role="Course" EntitySet="Course" />
           </AssociationSet>
           <AssociationSet Name="FK_Course_ToTable_2" Association="Self.FK_Course_ToTable_2">
             <End Role="Faculty" EntitySet="Faculty" />
             <End Role="Course" EntitySet="Course" />
           </AssociationSet>
-          <AssociationSet Name="FK_Course_ToTable_3" Association="Self.FK_Course_ToTable_3">
-            <End Role="Semester" EntitySet="Semester" />
-            <End Role="Course" EntitySet="Course" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Lecture_ToTable" Association="Self.FK_Lecture_ToTable">
-            <End Role="Course" EntitySet="Course" />
-            <End Role="Lecture" EntitySet="Lecture" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Lecture_ToTable_1" Association="Self.FK_Lecture_ToTable_1">
-            <End Role="Subject" EntitySet="Subject" />
-            <End Role="Lecture" EntitySet="Lecture" />
-          </AssociationSet>
           <AssociationSet Name="FK_Lecture_ToTable_2" Association="Self.FK_Lecture_ToTable_2">
             <End Role="Gender" EntitySet="Gender" />
-            <End Role="Lecture" EntitySet="Lecture" />
+            <End Role="Lecturer" EntitySet="Lecturer" />
           </AssociationSet>
-          <AssociationSet Name="FK_Lecture_ToTable_3" Association="Self.FK_Lecture_ToTable_3">
-            <End Role="Attendance" EntitySet="Attendance" />
-            <End Role="Lecture" EntitySet="Lecture" />
+          <AssociationSet Name="FK_Lecturer_ToTable" Association="Self.FK_Lecturer_ToTable">
+            <End Role="Faculty" EntitySet="Faculty" />
+            <End Role="Lecturer" EntitySet="Lecturer" />
           </AssociationSet>
           <AssociationSet Name="FK_Subject_ToTable" Association="Self.FK_Subject_ToTable">
-            <End Role="Attendance" EntitySet="Attendance" />
-            <End Role="Subject" EntitySet="Subject" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Subject_ToTable_1" Association="Self.FK_Subject_ToTable_1">
-            <End Role="Room" EntitySet="Room" />
+            <End Role="Course" EntitySet="Course" />
             <End Role="Subject" EntitySet="Subject" />
           </AssociationSet>
         </EntityContainer>
@@ -265,22 +365,129 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ClassShedulerModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="ClassShedulerEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AcademicYears" EntityType="ClassShedulerModel.AcademicYear" />
+          <EntitySet Name="CouresAssingments" EntityType="ClassShedulerModel.CouresAssingment" />
+          <EntitySet Name="Courses" EntityType="ClassShedulerModel.Course" />
+          <EntitySet Name="DateOfSubs" EntityType="ClassShedulerModel.DateOfSub" />
+          <EntitySet Name="Faculties" EntityType="ClassShedulerModel.Faculty" />
+          <EntitySet Name="Genders" EntityType="ClassShedulerModel.Gender" />
+          <EntitySet Name="Lecturers" EntityType="ClassShedulerModel.Lecturer" />
+          <EntitySet Name="LevelOfStudies" EntityType="ClassShedulerModel.LevelOfStudy" />
+          <EntitySet Name="ModeOfStudies" EntityType="ClassShedulerModel.ModeOfStudy" />
+          <EntitySet Name="Rooms" EntityType="ClassShedulerModel.Room" />
+          <EntitySet Name="Semesters" EntityType="ClassShedulerModel.Semester" />
+          <EntitySet Name="Subjects" EntityType="ClassShedulerModel.Subject" />
+          <EntitySet Name="Times" EntityType="ClassShedulerModel.Time" />
+          <EntitySet Name="Users" EntityType="ClassShedulerModel.User" />
+          <AssociationSet Name="FK_CouresAssingment_ToTable" Association="ClassShedulerModel.FK_CouresAssingment_ToTable">
+            <End Role="Faculty" EntitySet="Faculties" />
+            <End Role="CouresAssingment" EntitySet="CouresAssingments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CouresAssingment_ToTable_1" Association="ClassShedulerModel.FK_CouresAssingment_ToTable_1">
+            <End Role="Course" EntitySet="Courses" />
+            <End Role="CouresAssingment" EntitySet="CouresAssingments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CouresAssingment_ToTable_2" Association="ClassShedulerModel.FK_CouresAssingment_ToTable_2">
+            <End Role="Subject" EntitySet="Subjects" />
+            <End Role="CouresAssingment" EntitySet="CouresAssingments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CouresAssingment_ToTable_3" Association="ClassShedulerModel.FK_CouresAssingment_ToTable_3">
+            <End Role="Lecturer" EntitySet="Lecturers" />
+            <End Role="CouresAssingment" EntitySet="CouresAssingments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CouresAssingment_ToTable_4" Association="ClassShedulerModel.FK_CouresAssingment_ToTable_4">
+            <End Role="Room" EntitySet="Rooms" />
+            <End Role="CouresAssingment" EntitySet="CouresAssingments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CouresAssingment_ToTable_5" Association="ClassShedulerModel.FK_CouresAssingment_ToTable_5">
+            <End Role="ModeOfStudy" EntitySet="ModeOfStudies" />
+            <End Role="CouresAssingment" EntitySet="CouresAssingments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CouresAssingment_ToTable_6" Association="ClassShedulerModel.FK_CouresAssingment_ToTable_6">
+            <End Role="Semester" EntitySet="Semesters" />
+            <End Role="CouresAssingment" EntitySet="CouresAssingments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CouresAssingment_ToTable_7" Association="ClassShedulerModel.FK_CouresAssingment_ToTable_7">
+            <End Role="Time" EntitySet="Times" />
+            <End Role="CouresAssingment" EntitySet="CouresAssingments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CouresAssingment_ToTable_8" Association="ClassShedulerModel.FK_CouresAssingment_ToTable_8">
+            <End Role="DateOfSub" EntitySet="DateOfSubs" />
+            <End Role="CouresAssingment" EntitySet="CouresAssingments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Course_ToTable" Association="ClassShedulerModel.FK_Course_ToTable">
+            <End Role="LevelOfStudy" EntitySet="LevelOfStudies" />
+            <End Role="Course" EntitySet="Courses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Course_ToTable_2" Association="ClassShedulerModel.FK_Course_ToTable_2">
+            <End Role="Faculty" EntitySet="Faculties" />
+            <End Role="Course" EntitySet="Courses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Subject_ToTable" Association="ClassShedulerModel.FK_Subject_ToTable">
+            <End Role="Course" EntitySet="Courses" />
+            <End Role="Subject" EntitySet="Subjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Lecturer_ToTable" Association="ClassShedulerModel.FK_Lecturer_ToTable">
+            <End Role="Faculty" EntitySet="Faculties" />
+            <End Role="Lecturer" EntitySet="Lecturers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Lecture_ToTable_2" Association="ClassShedulerModel.FK_Lecture_ToTable_2">
+            <End Role="Gender" EntitySet="Genders" />
+            <End Role="Lecturer" EntitySet="Lecturers" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="AcademicYear">
+          <Key>
+            <PropertyRef Name="Academic_Year_Id" />
+          </Key>
+          <Property Name="Academic_Year_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Academic_Year" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="CouresAssingment">
+          <Key>
+            <PropertyRef Name="CouresAssingment_Id" />
+          </Key>
+          <Property Name="CouresAssingment_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Faculty_id" Type="Int32" />
+          <Property Name="Course_id" Type="Int32" />
+          <Property Name="Subject_id" Type="Int32" />
+          <Property Name="Lecturer_id" Type="Int32" />
+          <Property Name="Room_id" Type="Int32" />
+          <Property Name="Mode_Of_Study_id" Type="Int32" />
+          <Property Name="Semester_id" Type="Int32" />
+          <Property Name="Time_id" Type="Int32" />
+          <Property Name="DateOfSub_id" Type="Int32" />
+          <NavigationProperty Name="Faculty" Relationship="ClassShedulerModel.FK_CouresAssingment_ToTable" FromRole="CouresAssingment" ToRole="Faculty" />
+          <NavigationProperty Name="Course" Relationship="ClassShedulerModel.FK_CouresAssingment_ToTable_1" FromRole="CouresAssingment" ToRole="Course" />
+          <NavigationProperty Name="Subject" Relationship="ClassShedulerModel.FK_CouresAssingment_ToTable_2" FromRole="CouresAssingment" ToRole="Subject" />
+          <NavigationProperty Name="Lecturer" Relationship="ClassShedulerModel.FK_CouresAssingment_ToTable_3" FromRole="CouresAssingment" ToRole="Lecturer" />
+          <NavigationProperty Name="Room" Relationship="ClassShedulerModel.FK_CouresAssingment_ToTable_4" FromRole="CouresAssingment" ToRole="Room" />
+          <NavigationProperty Name="ModeOfStudy" Relationship="ClassShedulerModel.FK_CouresAssingment_ToTable_5" FromRole="CouresAssingment" ToRole="ModeOfStudy" />
+          <NavigationProperty Name="Semester" Relationship="ClassShedulerModel.FK_CouresAssingment_ToTable_6" FromRole="CouresAssingment" ToRole="Semester" />
+          <NavigationProperty Name="Time" Relationship="ClassShedulerModel.FK_CouresAssingment_ToTable_7" FromRole="CouresAssingment" ToRole="Time" />
+          <NavigationProperty Name="DateOfSub" Relationship="ClassShedulerModel.FK_CouresAssingment_ToTable_8" FromRole="CouresAssingment" ToRole="DateOfSub" />
+        </EntityType>
         <EntityType Name="Course">
           <Key>
             <PropertyRef Name="Course_Id" />
           </Key>
           <Property Name="Course_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Course1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Course_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Faculty_Id" Type="Int32" />
-          <Property Name="Suject_Id" Type="Int32" />
-          <Property Name="Year_id" Type="Int32" />
-          <NavigationProperty Name="Year" Relationship="Self.FK_Course_ToTable" FromRole="Course" ToRole="Year" />
-          <NavigationProperty Name="Subject" Relationship="Self.FK_Course_ToTable_1" FromRole="Course" ToRole="Subject" />
-          <NavigationProperty Name="Faculty" Relationship="Self.FK_Course_ToTable_2" FromRole="Course" ToRole="Faculty" />
-          <NavigationProperty Name="Lectures" Relationship="Self.FK_Lecture_ToTable" FromRole="Course" ToRole="Lecture" />
-          <Property Name="semester_id_" Type="Int32" />
-          <NavigationProperty Name="Semester" Relationship="ClassShedulerModel.FK_Course_ToTable_3" FromRole="Course" ToRole="Semester" />
-          <Property Name="department_id" Type="Int32" />
+          <Property Name="LevelOfStudy_id" Type="Int32" />
+          <NavigationProperty Name="CouresAssingments" Relationship="ClassShedulerModel.FK_CouresAssingment_ToTable_1" FromRole="Course" ToRole="CouresAssingment" />
+          <NavigationProperty Name="LevelOfStudy" Relationship="ClassShedulerModel.FK_Course_ToTable" FromRole="Course" ToRole="LevelOfStudy" />
+          <NavigationProperty Name="Faculty" Relationship="ClassShedulerModel.FK_Course_ToTable_2" FromRole="Course" ToRole="Faculty" />
+          <NavigationProperty Name="Subjects" Relationship="ClassShedulerModel.FK_Subject_ToTable" FromRole="Course" ToRole="Subject" />
+        </EntityType>
+        <EntityType Name="DateOfSub">
+          <Key>
+            <PropertyRef Name="DateOfSub_Id" />
+          </Key>
+          <Property Name="DateOfSub_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DateOfSub1" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="CouresAssingments" Relationship="ClassShedulerModel.FK_CouresAssingment_ToTable_8" FromRole="DateOfSub" ToRole="CouresAssingment" />
         </EntityType>
         <EntityType Name="Faculty">
           <Key>
@@ -288,45 +495,83 @@
           </Key>
           <Property Name="Faculty_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Faculty1" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Courses" Relationship="Self.FK_Course_ToTable_2" FromRole="Faculty" ToRole="Course" />
+          <NavigationProperty Name="CouresAssingments" Relationship="ClassShedulerModel.FK_CouresAssingment_ToTable" FromRole="Faculty" ToRole="CouresAssingment" />
+          <NavigationProperty Name="Courses" Relationship="ClassShedulerModel.FK_Course_ToTable_2" FromRole="Faculty" ToRole="Course" />
+          <NavigationProperty Name="Lecturers" Relationship="ClassShedulerModel.FK_Lecturer_ToTable" FromRole="Faculty" ToRole="Lecturer" />
         </EntityType>
-        <EntityType Name="Lecture">
+        <EntityType Name="Gender">
           <Key>
-            <PropertyRef Name="Lecture_Id" />
+            <PropertyRef Name="Gendere_Id" />
           </Key>
-          <Property Name="Lecture_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Gendere_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Gender1" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Lecturers" Relationship="ClassShedulerModel.FK_Lecture_ToTable_2" FromRole="Gender" ToRole="Lecturer" />
+        </EntityType>
+        <EntityType Name="Lecturer">
+          <Key>
+            <PropertyRef Name="Lecturer_Id" />
+          </Key>
+          <Property Name="Lecturer_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="First_Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Middle_Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Last_Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Course_Id" Type="Int32" />
-          <Property Name="Subject_Id" Type="Int32" />
-          <NavigationProperty Name="Course" Relationship="Self.FK_Lecture_ToTable" FromRole="Lecture" ToRole="Course" />
-          <NavigationProperty Name="Subject" Relationship="Self.FK_Lecture_ToTable_1" FromRole="Lecture" ToRole="Subject" />
           <Property Name="Address" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
           <Property Name="gender_id" Type="Int32" />
-          <Property Name="attendance_id" Type="Int32" />
-          <NavigationProperty Name="Attendance" Relationship="ClassShedulerModel.FK_Lecture_ToTable_3" FromRole="Lecture" ToRole="Attendance" />
-          <NavigationProperty Name="Gender" Relationship="ClassShedulerModel.FK_Lecture_ToTable_2" FromRole="Lecture" ToRole="Gender" />
+          <Property Name="Faculty_id" Type="Int32" />
+          <Property Name="Initial" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CouresAssingments" Relationship="ClassShedulerModel.FK_CouresAssingment_ToTable_3" FromRole="Lecturer" ToRole="CouresAssingment" />
+          <NavigationProperty Name="Faculty" Relationship="ClassShedulerModel.FK_Lecturer_ToTable" FromRole="Lecturer" ToRole="Faculty" />
+          <NavigationProperty Name="Gender" Relationship="ClassShedulerModel.FK_Lecture_ToTable_2" FromRole="Lecturer" ToRole="Gender" />
+        </EntityType>
+        <EntityType Name="LevelOfStudy">
+          <Key>
+            <PropertyRef Name="LevelOfStudy_Id" />
+          </Key>
+          <Property Name="LevelOfStudy_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LevelOfStudy1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Courses" Relationship="ClassShedulerModel.FK_Course_ToTable" FromRole="LevelOfStudy" ToRole="Course" />
+        </EntityType>
+        <EntityType Name="ModeOfStudy">
+          <Key>
+            <PropertyRef Name="ModeOfStudy_Id" />
+          </Key>
+          <Property Name="ModeOfStudy_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ModeOfStudy1" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CouresAssingments" Relationship="ClassShedulerModel.FK_CouresAssingment_ToTable_5" FromRole="ModeOfStudy" ToRole="CouresAssingment" />
+        </EntityType>
+        <EntityType Name="Room">
+          <Key>
+            <PropertyRef Name="Room_ID" />
+          </Key>
+          <Property Name="Room_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Room1" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CouresAssingments" Relationship="ClassShedulerModel.FK_CouresAssingment_ToTable_4" FromRole="Room" ToRole="CouresAssingment" />
         </EntityType>
         <EntityType Name="Semester">
           <Key>
             <PropertyRef Name="Semester_Id" />
           </Key>
           <Property Name="Semester_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Semester1" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Courses" Relationship="ClassShedulerModel.FK_Course_ToTable_3" FromRole="Semester" ToRole="Course" />
+          <Property Name="Semester1" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CouresAssingments" Relationship="ClassShedulerModel.FK_CouresAssingment_ToTable_6" FromRole="Semester" ToRole="CouresAssingment" />
         </EntityType>
         <EntityType Name="Subject">
           <Key>
             <PropertyRef Name="Subject_Id" />
           </Key>
           <Property Name="Subject_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Subject1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Courses" Relationship="Self.FK_Course_ToTable_1" FromRole="Subject" ToRole="Course" />
-          <NavigationProperty Name="Lectures" Relationship="Self.FK_Lecture_ToTable_1" FromRole="Subject" ToRole="Lecture" />
-          <Property Name="attendance_id" Type="Int32" />
-          <Property Name="room_id" Type="Int32" />
-          <NavigationProperty Name="Attendance" Relationship="ClassShedulerModel.FK_Subject_ToTable" FromRole="Subject" ToRole="Attendance" />
-          <NavigationProperty Name="Room" Relationship="ClassShedulerModel.FK_Subject_ToTable_1" FromRole="Subject" ToRole="Room" />
+          <Property Name="Subject_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Course_id" Type="Int32" />
+          <NavigationProperty Name="CouresAssingments" Relationship="ClassShedulerModel.FK_CouresAssingment_ToTable_2" FromRole="Subject" ToRole="CouresAssingment" />
+          <NavigationProperty Name="Course" Relationship="ClassShedulerModel.FK_Subject_ToTable" FromRole="Subject" ToRole="Course" />
+        </EntityType>
+        <EntityType Name="Time">
+          <Key>
+            <PropertyRef Name="Time_Id" />
+          </Key>
+          <Property Name="Time_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Time1" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CouresAssingments" Relationship="ClassShedulerModel.FK_CouresAssingment_ToTable_7" FromRole="Time" ToRole="CouresAssingment" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -336,41 +581,129 @@
           <Property Name="User_Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Password" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="Year">
-          <Key>
-            <PropertyRef Name="Year_Id" />
-          </Key>
-          <Property Name="Year_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Year1" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Courses" Relationship="Self.FK_Course_ToTable" FromRole="Year" ToRole="Course" />
-        </EntityType>
-        <Association Name="FK_Course_ToTable">
-          <End Role="Year" Type="Self.Year" Multiplicity="0..1" />
-          <End Role="Course" Type="Self.Course" Multiplicity="*" />
+        <Association Name="FK_CouresAssingment_ToTable">
+          <End Type="ClassShedulerModel.Faculty" Role="Faculty" Multiplicity="0..1" />
+          <End Type="ClassShedulerModel.CouresAssingment" Role="CouresAssingment" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Year">
-              <PropertyRef Name="Year_Id" />
+            <Principal Role="Faculty">
+              <PropertyRef Name="Faculty_Id" />
             </Principal>
-            <Dependent Role="Course">
-              <PropertyRef Name="Year_id" />
+            <Dependent Role="CouresAssingment">
+              <PropertyRef Name="Faculty_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Course_ToTable_1">
-          <End Role="Subject" Type="Self.Subject" Multiplicity="0..1" />
-          <End Role="Course" Type="Self.Course" Multiplicity="*" />
+        <Association Name="FK_CouresAssingment_ToTable_1">
+          <End Type="ClassShedulerModel.Course" Role="Course" Multiplicity="0..1" />
+          <End Type="ClassShedulerModel.CouresAssingment" Role="CouresAssingment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="Course_Id" />
+            </Principal>
+            <Dependent Role="CouresAssingment">
+              <PropertyRef Name="Course_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CouresAssingment_ToTable_2">
+          <End Type="ClassShedulerModel.Subject" Role="Subject" Multiplicity="0..1" />
+          <End Type="ClassShedulerModel.CouresAssingment" Role="CouresAssingment" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Subject">
               <PropertyRef Name="Subject_Id" />
             </Principal>
+            <Dependent Role="CouresAssingment">
+              <PropertyRef Name="Subject_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CouresAssingment_ToTable_3">
+          <End Type="ClassShedulerModel.Lecturer" Role="Lecturer" Multiplicity="0..1" />
+          <End Type="ClassShedulerModel.CouresAssingment" Role="CouresAssingment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lecturer">
+              <PropertyRef Name="Lecturer_Id" />
+            </Principal>
+            <Dependent Role="CouresAssingment">
+              <PropertyRef Name="Lecturer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CouresAssingment_ToTable_4">
+          <End Type="ClassShedulerModel.Room" Role="Room" Multiplicity="0..1" />
+          <End Type="ClassShedulerModel.CouresAssingment" Role="CouresAssingment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Room">
+              <PropertyRef Name="Room_ID" />
+            </Principal>
+            <Dependent Role="CouresAssingment">
+              <PropertyRef Name="Room_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CouresAssingment_ToTable_5">
+          <End Type="ClassShedulerModel.ModeOfStudy" Role="ModeOfStudy" Multiplicity="0..1" />
+          <End Type="ClassShedulerModel.CouresAssingment" Role="CouresAssingment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ModeOfStudy">
+              <PropertyRef Name="ModeOfStudy_Id" />
+            </Principal>
+            <Dependent Role="CouresAssingment">
+              <PropertyRef Name="Mode_Of_Study_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CouresAssingment_ToTable_6">
+          <End Type="ClassShedulerModel.Semester" Role="Semester" Multiplicity="0..1" />
+          <End Type="ClassShedulerModel.CouresAssingment" Role="CouresAssingment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Semester">
+              <PropertyRef Name="Semester_Id" />
+            </Principal>
+            <Dependent Role="CouresAssingment">
+              <PropertyRef Name="Semester_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CouresAssingment_ToTable_7">
+          <End Type="ClassShedulerModel.Time" Role="Time" Multiplicity="0..1" />
+          <End Type="ClassShedulerModel.CouresAssingment" Role="CouresAssingment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Time">
+              <PropertyRef Name="Time_Id" />
+            </Principal>
+            <Dependent Role="CouresAssingment">
+              <PropertyRef Name="Time_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CouresAssingment_ToTable_8">
+          <End Type="ClassShedulerModel.DateOfSub" Role="DateOfSub" Multiplicity="0..1" />
+          <End Type="ClassShedulerModel.CouresAssingment" Role="CouresAssingment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DateOfSub">
+              <PropertyRef Name="DateOfSub_Id" />
+            </Principal>
+            <Dependent Role="CouresAssingment">
+              <PropertyRef Name="DateOfSub_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Course_ToTable">
+          <End Type="ClassShedulerModel.LevelOfStudy" Role="LevelOfStudy" Multiplicity="0..1" />
+          <End Type="ClassShedulerModel.Course" Role="Course" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LevelOfStudy">
+              <PropertyRef Name="LevelOfStudy_Id" />
+            </Principal>
             <Dependent Role="Course">
-              <PropertyRef Name="Suject_Id" />
+              <PropertyRef Name="LevelOfStudy_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Course_ToTable_2">
-          <End Role="Faculty" Type="Self.Faculty" Multiplicity="0..1" />
-          <End Role="Course" Type="Self.Course" Multiplicity="*" />
+          <End Type="ClassShedulerModel.Faculty" Role="Faculty" Multiplicity="0..1" />
+          <End Type="ClassShedulerModel.Course" Role="Course" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Faculty">
               <PropertyRef Name="Faculty_Id" />
@@ -380,248 +713,95 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Lecture_ToTable">
-          <End Role="Course" Type="Self.Course" Multiplicity="0..1" />
-          <End Role="Lecture" Type="Self.Lecture" Multiplicity="*" />
+        <Association Name="FK_Subject_ToTable">
+          <End Type="ClassShedulerModel.Course" Role="Course" Multiplicity="0..1" />
+          <End Type="ClassShedulerModel.Subject" Role="Subject" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Course">
               <PropertyRef Name="Course_Id" />
             </Principal>
-            <Dependent Role="Lecture">
-              <PropertyRef Name="Course_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Lecture_ToTable_1">
-          <End Role="Subject" Type="Self.Subject" Multiplicity="0..1" />
-          <End Role="Lecture" Type="Self.Lecture" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Subject">
-              <PropertyRef Name="Subject_Id" />
-            </Principal>
-            <Dependent Role="Lecture">
-              <PropertyRef Name="Subject_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityContainer Name="ClassShedulerEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Courses" EntityType="Self.Course" />
-          <EntitySet Name="Faculties" EntityType="Self.Faculty" />
-          <EntitySet Name="Lectures" EntityType="Self.Lecture" />
-          <EntitySet Name="Semesters" EntityType="Self.Semester" />
-          <EntitySet Name="Subjects" EntityType="Self.Subject" />
-          <EntitySet Name="Users" EntityType="Self.User" />
-          <EntitySet Name="Years" EntityType="Self.Year" />
-          <AssociationSet Name="FK_Course_ToTable" Association="Self.FK_Course_ToTable">
-            <End Role="Year" EntitySet="Years" />
-            <End Role="Course" EntitySet="Courses" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Course_ToTable_1" Association="Self.FK_Course_ToTable_1">
-            <End Role="Subject" EntitySet="Subjects" />
-            <End Role="Course" EntitySet="Courses" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Course_ToTable_2" Association="Self.FK_Course_ToTable_2">
-            <End Role="Faculty" EntitySet="Faculties" />
-            <End Role="Course" EntitySet="Courses" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Lecture_ToTable" Association="Self.FK_Lecture_ToTable">
-            <End Role="Course" EntitySet="Courses" />
-            <End Role="Lecture" EntitySet="Lectures" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Lecture_ToTable_1" Association="Self.FK_Lecture_ToTable_1">
-            <End Role="Subject" EntitySet="Subjects" />
-            <End Role="Lecture" EntitySet="Lectures" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Course_ToTable_3" Association="ClassShedulerModel.FK_Course_ToTable_3">
-            <End Role="Semester" EntitySet="Semesters" />
-            <End Role="Course" EntitySet="Courses" />
-          </AssociationSet>
-          <EntitySet Name="Attendances" EntityType="ClassShedulerModel.Attendance" />
-          <EntitySet Name="Genders" EntityType="ClassShedulerModel.Gender" />
-          <EntitySet Name="Rooms" EntityType="ClassShedulerModel.Room" />
-          <AssociationSet Name="FK_Lecture_ToTable_3" Association="ClassShedulerModel.FK_Lecture_ToTable_3">
-            <End Role="Attendance" EntitySet="Attendances" />
-            <End Role="Lecture" EntitySet="Lectures" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Subject_ToTable" Association="ClassShedulerModel.FK_Subject_ToTable">
-            <End Role="Attendance" EntitySet="Attendances" />
-            <End Role="Subject" EntitySet="Subjects" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Lecture_ToTable_2" Association="ClassShedulerModel.FK_Lecture_ToTable_2">
-            <End Role="Gender" EntitySet="Genders" />
-            <End Role="Lecture" EntitySet="Lectures" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Subject_ToTable_1" Association="ClassShedulerModel.FK_Subject_ToTable_1">
-            <End Role="Room" EntitySet="Rooms" />
-            <End Role="Subject" EntitySet="Subjects" />
-          </AssociationSet>
-        </EntityContainer>
-        <Association Name="FK_Course_ToTable_3">
-          <End Type="ClassShedulerModel.Semester" Role="Semester" Multiplicity="0..1" />
-          <End Type="ClassShedulerModel.Course" Role="Course" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Semester">
-              <PropertyRef Name="Semester_Id" />
-            </Principal>
-            <Dependent Role="Course">
-              <PropertyRef Name="semester_id_" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="Attendance">
-          <Key>
-            <PropertyRef Name="Attendance_Id" />
-          </Key>
-          <Property Name="Attendance_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Attendance1" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Lectures" Relationship="ClassShedulerModel.FK_Lecture_ToTable_3" FromRole="Attendance" ToRole="Lecture" />
-          <NavigationProperty Name="Subjects" Relationship="ClassShedulerModel.FK_Subject_ToTable" FromRole="Attendance" ToRole="Subject" />
-        </EntityType>
-        <EntityType Name="Gender">
-          <Key>
-            <PropertyRef Name="Gendere_Id" />
-          </Key>
-          <Property Name="Gendere_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Gender1" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Lectures" Relationship="ClassShedulerModel.FK_Lecture_ToTable_2" FromRole="Gender" ToRole="Lecture" />
-        </EntityType>
-        <EntityType Name="Room">
-          <Key>
-            <PropertyRef Name="Room_ID" />
-          </Key>
-          <Property Name="Room_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Room1" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Subjects" Relationship="ClassShedulerModel.FK_Subject_ToTable_1" FromRole="Room" ToRole="Subject" />
-        </EntityType>
-        <Association Name="FK_Lecture_ToTable_3">
-          <End Type="ClassShedulerModel.Attendance" Role="Attendance" Multiplicity="0..1" />
-          <End Type="ClassShedulerModel.Lecture" Role="Lecture" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Attendance">
-              <PropertyRef Name="Attendance_Id" />
-            </Principal>
-            <Dependent Role="Lecture">
-              <PropertyRef Name="attendance_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Subject_ToTable">
-          <End Type="ClassShedulerModel.Attendance" Role="Attendance" Multiplicity="0..1" />
-          <End Type="ClassShedulerModel.Subject" Role="Subject" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Attendance">
-              <PropertyRef Name="Attendance_Id" />
-            </Principal>
             <Dependent Role="Subject">
-              <PropertyRef Name="attendance_id" />
+              <PropertyRef Name="Course_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Lecturer_ToTable">
+          <End Type="ClassShedulerModel.Faculty" Role="Faculty" Multiplicity="0..1" />
+          <End Type="ClassShedulerModel.Lecturer" Role="Lecturer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Faculty">
+              <PropertyRef Name="Faculty_Id" />
+            </Principal>
+            <Dependent Role="Lecturer">
+              <PropertyRef Name="Faculty_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Lecture_ToTable_2">
           <End Type="ClassShedulerModel.Gender" Role="Gender" Multiplicity="0..1" />
-          <End Type="ClassShedulerModel.Lecture" Role="Lecture" Multiplicity="*" />
+          <End Type="ClassShedulerModel.Lecturer" Role="Lecturer" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Gender">
               <PropertyRef Name="Gendere_Id" />
             </Principal>
-            <Dependent Role="Lecture">
+            <Dependent Role="Lecturer">
               <PropertyRef Name="gender_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Subject_ToTable_1">
-          <End Type="ClassShedulerModel.Room" Role="Room" Multiplicity="0..1" />
-          <End Type="ClassShedulerModel.Subject" Role="Subject" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Room">
-              <PropertyRef Name="Room_ID" />
-            </Principal>
-            <Dependent Role="Subject">
-              <PropertyRef Name="room_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="ClassShedulerModelStoreContainer" CdmEntityContainer="ClassShedulerEntities">
+          <EntitySetMapping Name="AcademicYears">
+            <EntityTypeMapping TypeName="ClassShedulerModel.AcademicYear">
+              <MappingFragment StoreEntitySet="AcademicYear">
+                <ScalarProperty Name="Academic_Year" ColumnName="Academic_Year" />
+                <ScalarProperty Name="Academic_Year_Id" ColumnName="Academic_Year_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CouresAssingments">
+            <EntityTypeMapping TypeName="ClassShedulerModel.CouresAssingment">
+              <MappingFragment StoreEntitySet="CouresAssingment">
+                <ScalarProperty Name="DateOfSub_id" ColumnName="DateOfSub_id" />
+                <ScalarProperty Name="Time_id" ColumnName="Time_id" />
+                <ScalarProperty Name="Semester_id" ColumnName="Semester_id" />
+                <ScalarProperty Name="Mode_Of_Study_id" ColumnName="Mode_Of_Study_id" />
+                <ScalarProperty Name="Room_id" ColumnName="Room_id" />
+                <ScalarProperty Name="Lecturer_id" ColumnName="Lecturer_id" />
+                <ScalarProperty Name="Subject_id" ColumnName="Subject_id" />
+                <ScalarProperty Name="Course_id" ColumnName="Course_id" />
+                <ScalarProperty Name="Faculty_id" ColumnName="Faculty_id" />
+                <ScalarProperty Name="CouresAssingment_Id" ColumnName="CouresAssingment_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Courses">
             <EntityTypeMapping TypeName="ClassShedulerModel.Course">
               <MappingFragment StoreEntitySet="Course">
-                <ScalarProperty Name="department_id" ColumnName="department_id" />
-                <ScalarProperty Name="semester_id_" ColumnName="semester_id " />
-                <ScalarProperty Name="Course_Id" ColumnName="Course_Id" />
-                <ScalarProperty Name="Course1" ColumnName="Course" />
+                <ScalarProperty Name="LevelOfStudy_id" ColumnName="LevelOfStudy_id" />
                 <ScalarProperty Name="Faculty_Id" ColumnName="Faculty_Id" />
-                <ScalarProperty Name="Suject_Id" ColumnName="Suject_Id" />
-                <ScalarProperty Name="Year_id" ColumnName="Year_id" />
+                <ScalarProperty Name="Course_Name" ColumnName="Course_Name" />
+                <ScalarProperty Name="Course_Id" ColumnName="Course_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DateOfSubs">
+            <EntityTypeMapping TypeName="ClassShedulerModel.DateOfSub">
+              <MappingFragment StoreEntitySet="DateOfSub">
+                <ScalarProperty Name="DateOfSub1" ColumnName="DateOfSub" />
+                <ScalarProperty Name="DateOfSub_Id" ColumnName="DateOfSub_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Faculties">
             <EntityTypeMapping TypeName="ClassShedulerModel.Faculty">
               <MappingFragment StoreEntitySet="Faculty">
-                <ScalarProperty Name="Faculty_Id" ColumnName="Faculty_Id" />
                 <ScalarProperty Name="Faculty1" ColumnName="Faculty" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Lectures">
-            <EntityTypeMapping TypeName="ClassShedulerModel.Lecture">
-              <MappingFragment StoreEntitySet="Lecture">
-                <ScalarProperty Name="attendance_id" ColumnName="attendance_id" />
-                <ScalarProperty Name="gender_id" ColumnName="gender_id" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="Lecture_Id" ColumnName="Lecture_Id" />
-                <ScalarProperty Name="First_Name" ColumnName="First_Name" />
-                <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />
-                <ScalarProperty Name="Course_Id" ColumnName="Course_Id" />
-                <ScalarProperty Name="Subject_Id" ColumnName="Subject_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Semesters">
-            <EntityTypeMapping TypeName="ClassShedulerModel.Semester">
-              <MappingFragment StoreEntitySet="Semester">
-                <ScalarProperty Name="Semester_Id" ColumnName="Semester_Id" />
-                <ScalarProperty Name="Semester1" ColumnName="Semester" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Subjects">
-            <EntityTypeMapping TypeName="ClassShedulerModel.Subject">
-              <MappingFragment StoreEntitySet="Subject">
-                <ScalarProperty Name="room_id" ColumnName="room_id" />
-                <ScalarProperty Name="attendance_id" ColumnName="attendance_id" />
-                <ScalarProperty Name="Subject_Id" ColumnName="Subject_Id" />
-                <ScalarProperty Name="Subject1" ColumnName="Subject" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Users">
-            <EntityTypeMapping TypeName="ClassShedulerModel.User">
-              <MappingFragment StoreEntitySet="Users">
-                <ScalarProperty Name="User_id" ColumnName="User_id" />
-                <ScalarProperty Name="User_Name" ColumnName="User_Name" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Years">
-            <EntityTypeMapping TypeName="ClassShedulerModel.Year">
-              <MappingFragment StoreEntitySet="Year">
-                <ScalarProperty Name="Year_Id" ColumnName="Year_Id" />
-                <ScalarProperty Name="Year1" ColumnName="Year" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Attendances">
-            <EntityTypeMapping TypeName="ClassShedulerModel.Attendance">
-              <MappingFragment StoreEntitySet="Attendance">
-                <ScalarProperty Name="Attendance1" ColumnName="Attendance" />
-                <ScalarProperty Name="Attendance_Id" ColumnName="Attendance_Id" />
+                <ScalarProperty Name="Faculty_Id" ColumnName="Faculty_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -633,11 +813,75 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Lecturers">
+            <EntityTypeMapping TypeName="ClassShedulerModel.Lecturer">
+              <MappingFragment StoreEntitySet="Lecturer">
+                <ScalarProperty Name="Initial" ColumnName="Initial" />
+                <ScalarProperty Name="Faculty_id" ColumnName="Faculty_id" />
+                <ScalarProperty Name="gender_id" ColumnName="gender_id" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />
+                <ScalarProperty Name="Middle_Name" ColumnName="Middle_Name" />
+                <ScalarProperty Name="First_Name" ColumnName="First_Name" />
+                <ScalarProperty Name="Lecturer_Id" ColumnName="Lecturer_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LevelOfStudies">
+            <EntityTypeMapping TypeName="ClassShedulerModel.LevelOfStudy">
+              <MappingFragment StoreEntitySet="LevelOfStudy">
+                <ScalarProperty Name="LevelOfStudy1" ColumnName="LevelOfStudy" />
+                <ScalarProperty Name="LevelOfStudy_Id" ColumnName="LevelOfStudy_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ModeOfStudies">
+            <EntityTypeMapping TypeName="ClassShedulerModel.ModeOfStudy">
+              <MappingFragment StoreEntitySet="ModeOfStudy">
+                <ScalarProperty Name="ModeOfStudy1" ColumnName="ModeOfStudy" />
+                <ScalarProperty Name="ModeOfStudy_Id" ColumnName="ModeOfStudy_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Rooms">
             <EntityTypeMapping TypeName="ClassShedulerModel.Room">
               <MappingFragment StoreEntitySet="Room">
                 <ScalarProperty Name="Room1" ColumnName="Room" />
                 <ScalarProperty Name="Room_ID" ColumnName="Room_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Semesters">
+            <EntityTypeMapping TypeName="ClassShedulerModel.Semester">
+              <MappingFragment StoreEntitySet="Semester">
+                <ScalarProperty Name="Semester1" ColumnName="Semester" />
+                <ScalarProperty Name="Semester_Id" ColumnName="Semester_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Subjects">
+            <EntityTypeMapping TypeName="ClassShedulerModel.Subject">
+              <MappingFragment StoreEntitySet="Subject">
+                <ScalarProperty Name="Course_id" ColumnName="Course_id" />
+                <ScalarProperty Name="Subject_Name" ColumnName="Subject_Name" />
+                <ScalarProperty Name="Subject_Id" ColumnName="Subject_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Times">
+            <EntityTypeMapping TypeName="ClassShedulerModel.Time">
+              <MappingFragment StoreEntitySet="Time">
+                <ScalarProperty Name="Time1" ColumnName="Time" />
+                <ScalarProperty Name="Time_Id" ColumnName="Time_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="ClassShedulerModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="User_Name" ColumnName="User_Name" />
+                <ScalarProperty Name="User_id" ColumnName="User_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

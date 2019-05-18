@@ -10,11 +10,16 @@ using System.Windows.Forms;
 
 namespace Class_Sheduling_System
 {
-    public partial class ClassSheduler : Form
+    public partial class ClassScheduler : Form
     {
-        public ClassSheduler()
+        public ClassScheduler()
         {
             InitializeComponent();
+        }
+
+        private void ClassScheduler_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

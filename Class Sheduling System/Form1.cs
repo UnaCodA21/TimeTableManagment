@@ -80,5 +80,20 @@ namespace Class_Sheduling_System
            
         }
 
+        private void classAssimentToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            if (isLoggedIn)
+            {
+                var courseAssingment = new CourseAssinment();
+                courseAssingment.MdiParent = this;
+                courseAssingment.Show();
+            }
+            else
+            {
+                ShowLoginForm();
+            }
+
+        }
     }
 }

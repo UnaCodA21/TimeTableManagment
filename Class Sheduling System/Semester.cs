@@ -17,13 +17,13 @@ namespace Class_Sheduling_System
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Semester()
         {
-            this.Courses = new HashSet<Course>();
+            this.CouresAssingments = new HashSet<CouresAssingment>();
         }
     
         public int Semester_Id { get; set; }
         public string Semester1 { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Course> Courses { get; set; }
+        public virtual ICollection<CouresAssingment> CouresAssingments { get; set; }
     }
 }
